@@ -60,6 +60,7 @@ public class OrderAction {
      * @param ctx HTTPリクエストの処理に関連するサーバ側の情報
      * @return HTTPレスポンス
      */
+
     @InjectForm(form = AcceptForm.class)
     @OnError(type = ApplicationException.class, path = "acceptance.html")
     public HttpResponse inputUser(HttpRequest req, ExecutionContext ctx) {
@@ -79,6 +80,8 @@ public class OrderAction {
      * @param ctx HTTPリクエストの処理に関連するサーバ側の情報
      * @return HTTPレスポンス
      */
+
+
     @InjectForm(form = UserForm.class)
     @OnError(type = ApplicationException.class, path = "forward://inputUserForError")
     @UseToken
