@@ -84,6 +84,7 @@ public class OrderAction {
     @UseToken
     public HttpResponse inputJob(HttpRequest req, ExecutionContext ctx) {
         UserForm form = ctx.getRequestScopedVar("form");
+        System.out.println("-----------------------------------------"+form.getMonthOfBirth());
         InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
 
         // treatLadyは女性しか加入できないため、性別選択チェックを行う。

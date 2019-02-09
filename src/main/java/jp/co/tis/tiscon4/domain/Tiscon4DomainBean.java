@@ -13,6 +13,7 @@ import jp.co.tis.tiscon4.core.validation.validator.YYYYMMDD;
 import jp.co.tis.tiscon4.core.validation.validator.ZipNumber;
 import nablarch.core.validation.ee.Digits;
 import nablarch.core.validation.ee.Length;
+import nablarch.core.validation.ee.NumberRange;
 import nablarch.core.validation.ee.SystemChar;
 
 /**
@@ -47,6 +48,16 @@ public class Tiscon4DomainBean {
     @YYYYMMDD()
     private String dateOfBirth;
 
+    @NumberRange(max=1922, min=1920)
+    private String yearOfBirth;
+
+    @NumberRange(max = 12, min = 1)
+    private String monthOfBirth;
+
+    @NumberRange(max = 31, min = 1)
+    private String dayOfBirth;
+
+
     /** 郵便番号 */
     @ZipNumber
     private String zipCode;
@@ -75,6 +86,7 @@ public class Tiscon4DomainBean {
 
     /** 所得金額 */
     @Digits(integer = 9, fraction = 0)
+   // @NumberRange(max = 10, min = 1)
     private String income;
 
     /** 職業 */
