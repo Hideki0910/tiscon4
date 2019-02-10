@@ -30,7 +30,8 @@ import nablarch.fw.web.interceptor.OnError;
  *
  * @author Kudo Sae
  */
-public class OrderAction {
+public class
+OrderAction {
 
     /**
      * 加入条件確認画面を表示する。
@@ -97,6 +98,9 @@ public class OrderAction {
         }
 
         UniversalDao.findAllBySqlFile(ZipcodeDto.class, "ZIPCODE_LIST");
+
+       // form.setAddress("新しい住所"+"番地");
+        form.setDateOfBirth(form.getYearOfBirth()+form.getMonthOfBirth()+form.getDayOfBirth());
 
         BeanUtil.copy(form, insOrder);
 
