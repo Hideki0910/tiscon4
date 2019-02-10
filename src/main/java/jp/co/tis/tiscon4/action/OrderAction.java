@@ -89,6 +89,7 @@ public class OrderAction {
         UserForm form = ctx.getRequestScopedVar("form");
         System.out.println("-----------------------------------------"+form.getMonthOfBirth());
         InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
+        BeanUtil.copy(form, insOrder);
 
         // treatLadyは女性しか加入できないため、性別選択チェックを行う。
         if (insOrder.getInsuranceType().equals("treatLady") && form.getGender().equals("male")) {
@@ -96,9 +97,8 @@ public class OrderAction {
             throw new ApplicationException(message);
         }
 
-        UniversalDao.findAllBySqlFile(ZipcodeDto.class, "ZIPCODE_LIST");
 
-        BeanUtil.copy(form, insOrder);
+
 
         ctx.setRequestScopedVar("form", new JobForm());
         ctx.setRequestScopedVar("industryTypes", IndustryType.values());
@@ -133,6 +133,8 @@ public class OrderAction {
     @OnError(type = ApplicationException.class, path = "forward://inputJobForError")
     @OnDoubleSubmission(path = "doubleSubmissionError.html")
     public HttpResponse create(HttpRequest req, ExecutionContext ctx) {
+
+
         JobForm form = ctx.getRequestScopedVar("form");
         InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
 
