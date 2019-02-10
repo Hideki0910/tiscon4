@@ -30,8 +30,7 @@ import nablarch.fw.web.interceptor.OnError;
  *
  * @author Kudo Sae
  */
-public class
-OrderAction {
+public class OrderAction {
 
     /**
      * 加入条件確認画面を表示する。
@@ -97,7 +96,6 @@ OrderAction {
             throw new ApplicationException(message);
         }
 
-        UniversalDao.findAllBySqlFile(ZipcodeDto.class, "ZIPCODE_LIST");
 
        // form.setAddress("新しい住所"+"番地");
         form.setDateOfBirth(form.getYearOfBirth()+form.getMonthOfBirth()+form.getDayOfBirth());
@@ -106,8 +104,15 @@ OrderAction {
 
         ctx.setRequestScopedVar("form", new JobForm());
         ctx.setRequestScopedVar("industryTypes", IndustryType.values());
-
-        return new HttpResponse("job.html");
+        /**
+         * お勤め先情報を入力する必要がない職種の人は入力完了のページまで進む
+         */
+        if ((form.getJob().equals("主婦"))|| (form.getJob().equals("学生")) || (form.getJob().equals("年金受給")) || (form.getJob().equals("パートアルバイト")) || (form.getJob().equals("他無職"))) {
+            return new HttpResponse("completed.html");
+        }
+        else {
+            return new HttpResponse("job.html");
+        }
     }
 
     /**
