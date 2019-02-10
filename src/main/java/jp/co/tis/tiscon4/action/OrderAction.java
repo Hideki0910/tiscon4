@@ -106,7 +106,12 @@ public class OrderAction {
          * お勤め先情報を入力する必要がない職種の人は入力完了のページまで進む
          */
         if ((form.getJob().equals("主婦"))|| (form.getJob().equals("学生")) || (form.getJob().equals("年金受給")) || (form.getJob().equals("パートアルバイト")) || (form.getJob().equals("他無職"))) {
-            return new HttpResponse("completed.html");
+
+            BeanUtil.copy(form, insOrder);
+
+            UniversalDao.insert(insOrder);
+
+            return new HttpResponse("redirect://completed");
         }
         else {
             return new HttpResponse("job.html");
