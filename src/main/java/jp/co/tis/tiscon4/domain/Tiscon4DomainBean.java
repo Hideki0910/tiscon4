@@ -48,7 +48,7 @@ public class Tiscon4DomainBean {
     @YYYYMMDD()
     private String dateOfBirth;
 
-    @NumberRange(max=1922, min=1920)
+    @NumberRange(max=2019, min=1900)
     private String yearOfBirth;
 
     @NumberRange(max = 12, min = 1)
